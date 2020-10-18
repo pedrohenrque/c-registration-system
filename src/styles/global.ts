@@ -16,7 +16,7 @@ export default createGlobalStyle`
 
   body, input, button, a {
     font: 16px 'Inter', sans-serif;
-    color: #fff;
+    color: #000;
   }
   #root {
     /* max-width: 900px; */

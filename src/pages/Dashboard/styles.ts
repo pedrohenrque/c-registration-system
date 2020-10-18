@@ -30,8 +30,8 @@ export const TeacherContainer = styled.div`
     transition: 0.3s;
 
     &:hover {
-      transform: translateY(-10px);
-      background: rgba(0, 0, 0, 0.4);
+      transform: translateY(-20px);
+      background: rgba(0, 0, 0, 0.52);
       border: 2px solid #5267f4;
     }
 
@@ -77,8 +77,8 @@ export const StudentContainer = styled.div`
     transition: 0.3s;
 
     &:hover {
-      transform: translateY(-10px);
-      background: rgba(0, 0, 0, 0.4);
+      transform: translateY(-20px);
+      background: rgba(0, 0, 0, 0.52);
       border: 2px solid #5267f4;
     }
 
