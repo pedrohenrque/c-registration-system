@@ -1,114 +1,109 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { MdKeyboardArrowLeft } from 'react-icons/md';
-import { FaPlus } from 'react-icons/fa';
-
-import InputTitle from '../../components/InputTitle';
-import * as Yup from 'yup';
-import { uuid } from 'uuidv4';
-
 import ModalContainer from '../../components/ModalContainer';
-
-import { FormHandles } from '@unform/core';
+import { uuid } from 'uuidv4';
 
 import {
   Container,
   HeaderContainer,
-  ButtonInclude,
+  Content,
+  Title,
+  Card,
   Table,
   TableContent,
-  Button,
-  Content,
-  FormContainer,
-  HeaderTable,
-  UpdateButton,
-  DeleteButton,
-  InputContainer,
+  DataContainer,
 } from './styles';
+import { setDayWithOptions } from 'date-fns/fp';
 
-interface TeacherProps {
+interface StudentsProps {
   id: any;
   name: string;
-  dateOfBirth: string;
-  socialSecurity: number;
-  status: string;
-  departament: string;
+  note?: string;
+}
+interface CourseProps {
+  id: any;
+  name: string;
+  active: boolean;
+  students?: StudentsProps[];
 }
 
-const Teacher: React.FC = () => {
-  const formRef = useRef<FormHandles>(null);
-  const [modelIsOpen, setmodalIsOpen] = useState(false);
-  const [updateModal, setUpdateModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
+const Student: React.FC = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [dataModal, setDataModal] = useState<StudentsProps[]>([]);
 
-  const [allTeacher, setAllTeacher] = useState<TeacherProps[]>(() => {
-    const storageRepositories = sessionStorage.getItem('@teacher:repositories');
-
-    if (storageRepositories) {
-      return JSON.parse(storageRepositories);
-    }
-    return [];
-  });
-
-  useEffect(() => {
-    sessionStorage.setItem('@teacher:repositories', JSON.stringify(allTeacher));
-  }, [allTeacher]);
-
-  const handleDelete = useCallback((index: number) => {
-    setAllTeacher(state => {
-      const newTeacher = [...state];
-
-      newTeacher.splice(index, 1);
-
-      return newTeacher;
-    });
-  }, []);
-
-  const handleSubmit = useCallback(async formData => {
-    try {
-      formRef.current?.setErrors({});
-
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Nome obrigatório'),
-        dateOfBirth: Yup.string().required('Data obrigatória'),
-        socialSecurity: Yup.string().required('Número obrigatório'),
-        status: Yup.string().required('Status obrigatório'),
-        departament: Yup.string().required('Departamento obrigatório'),
-      });
-
-      await schema.validate(formData, {
-        abortEarly: false,
-      });
-
-      const {
-        name,
-        dateOfBirth,
-        socialSecurity,
-        status,
-        departament,
-      } = formData;
-
-      setAllTeacher([
-        ...allTeacher,
+  const [allCourses, setAllCourses] = useState<CourseProps[]>(() => [
+    {
+      id: uuid(),
+      name: 'Análise e Desenvolvimento de Sistemas',
+      students: [
         {
           id: uuid(),
-          name: name,
-          dateOfBirth: dateOfBirth,
-          socialSecurity: socialSecurity,
-          status: status,
-          departament: departament,
+          name: 'Leonardo Henrique',
+          note: '9.2',
         },
-      ]);
+        {
+          id: uuid(),
+          name: 'Brigadeiro Chapado',
+          note: '9.2',
+        },
+      ],
+      active: true,
+    },
+    {
+      id: uuid(),
+      name: 'Banco de Dados',
+      active: false,
+    },
+    {
+      id: uuid(),
+      name: 'Segurança da informação',
+      active: false,
+    },
+    {
+      id: uuid(),
+      name: 'Construção de Edifícios',
+      active: false,
+    },
+    {
+      id: uuid(),
+      name: 'Engenharia Civil',
+      active: false,
+    },
+    {
+      id: uuid(),
+      name: 'Engenharia da Computação',
+      active: true,
+      students: [
+        {
+          id: uuid(),
+          name: 'Pedro Henrique',
+          note: '9.2',
+        },
+        {
+          id: uuid(),
+          name: 'Larissa Borges Calçados',
+          note: '9.2',
+        },
+      ],
+    },
+    {
+      id: uuid(),
+      name: 'Engenharia Elétrica',
+      active: false,
+    },
+    {
+      id: uuid(),
+      name: 'Engenharia de Produção',
+      active: false,
+    },
+  ]);
 
-      setmodalIsOpen(false);
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        // Todo erros
-        return;
-      }
-    }
-  }, []);
+  function handleDataModal(data: any) {
+    setOpenModal(true);
+    setDataModal(data);
+  }
 
   return (
     <Container>
@@ -122,97 +117,62 @@ const Teacher: React.FC = () => {
             </Link>
             <h1>Portal do Professor</h1>
           </div>
-          <ButtonInclude type="button" onClick={() => setmodalIsOpen(true)}>
-            <FaPlus size={14} />
-            Incluir professor
-          </ButtonInclude>
         </HeaderContainer>
+        <Title>
+          <h1>Cursos disponíveis:</h1>
+        </Title>
+        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+          {allCourses.map(course => (
+            <Card key={course.id}>
+              <h1>{course.name}</h1>
 
-        <Table>
-          <HeaderTable>
-            <h1>Professores cadastrados</h1>
-            <div>
-              <UpdateButton type="button" onClick={() => setUpdateModal(true)}>
-                Modificar um professor
-              </UpdateButton>
-              <DeleteButton type="button" onClick={() => setDeleteModal(true)}>
-                Excluir um professor
-              </DeleteButton>
-            </div>
-          </HeaderTable>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                {course.active === false ? (
+                  <button type="button">Ministrar</button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleDataModal(course.students)}
+                  >
+                    Dar nota
+                  </button>
+                )}
+              </div>
+            </Card>
+          ))}
+        </div>
+        <ModalContainer
+          title="Publicar notas"
+          openModal={openModal}
+          onClick={() => setOpenModal(false)}
+        >
           <TableContent>
             <ul style={{ color: '#232242' }}>
-              <li style={{ fontWeight: 'bold' }}>Nome</li>
-              <li style={{ fontWeight: 'bold' }}>Data de Nascimento</li>
-              <li style={{ fontWeight: 'bold' }}>Número Social</li>
-              <li style={{ fontWeight: 'bold' }}>Status</li>
-              <li style={{ fontWeight: 'bold' }}>Departamento</li>
+              <li style={{ fontWeight: 'bold' }}>Nome do aluno</li>
+              <li style={{ fontWeight: 'bold' }}>Notas</li>
+              <li style={{ fontWeight: 'bold' }}>Insira a nota</li>
             </ul>
-            {allTeacher &&
-              allTeacher.map((repo: TeacherProps, index) => (
-                <Button
-                  type="button"
-                  key={repo.id}
-                  onClick={() => handleDelete(index)}
-                >
+            {dataModal &&
+              dataModal.map(repo => (
+                <DataContainer key={repo.id}>
                   <ul>
                     <li>{repo.name} </li>
-                    <li>{repo.dateOfBirth}</li>
-                    <li>{repo.socialSecurity}</li>
-                    <li>{repo.status}</li>
-                    <li>{repo.departament}</li>
+                    <li>{repo.note}</li>
+                    <input maxLength={4} type="text" />
                   </ul>
-                </Button>
+                </DataContainer>
               ))}
           </TableContent>
-        </Table>
-
-        <ModalContainer
-          title="Modificar um professor"
-          openModal={updateModal}
-          onClick={() => setUpdateModal(false)}
-        >
-          <InputContainer>
-            <p>Digite ID do professor que deseja modificar:</p>
-            <input type="text" />
-            <button type="button">Buscar</button>
-          </InputContainer>
-        </ModalContainer>
-
-        <ModalContainer
-          title="Excluir um professor"
-          openModal={deleteModal}
-          onClick={() => setDeleteModal(false)}
-        >
-          <InputContainer>
-            <p>Digite ID do professor que deseja deletar:</p>
-            <input type="text" />
-            <button type="button">Buscar</button>
-          </InputContainer>
-        </ModalContainer>
-
-        <ModalContainer
-          title="Adicionar novo professor"
-          openModal={modelIsOpen}
-          onClick={() => setmodalIsOpen(false)}
-        >
-          <FormContainer ref={formRef} onSubmit={handleSubmit}>
-            <InputTitle title="Nome" name="name" />
-
-            <InputTitle title="Data de nascimento" name="dateOfBirth" />
-
-            <InputTitle title="Número social" name="socialSecurity" />
-
-            <InputTitle title="Status" name="status" />
-
-            <InputTitle title="Departamento" name="departament" />
-
-            <button type="submit">Salvar</button>
-          </FormContainer>
         </ModalContainer>
       </Content>
     </Container>
   );
 };
 
-export default Teacher;
+export default Student;

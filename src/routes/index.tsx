@@ -4,12 +4,14 @@ import { Switch, Route } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import Student from '../pages/Student';
 import Teacher from '../pages/Teacher';
+import SignUp from '../pages/SignUp';
 
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" component={Dashboard} exact />
     <Route path="/student" component={Student} />
     <Route path="/teacher" component={Teacher} />
+    <Route path="/signup" component={SignUp} />
   </Switch>
 );
 

@@ -9,7 +9,7 @@ interface ContainerProps {
 }
 
 export const Content = styled.div`
-  width: 350px;
+  flex: 1;
 
   & + div {
     margin-top: 20px;

@@ -1,6 +1,5 @@
 import { shade } from 'polished';
 import styled from 'styled-components';
-import { Form } from '@unform/web';
 
 export const Container = styled.div`
   flex: 1;
@@ -16,7 +15,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   flex: 1;
-  max-width: 900px;
+  max-width: 1280px;
 `;
 
 export const HeaderContainer = styled.div`
@@ -47,27 +46,8 @@ export const HeaderContainer = styled.div`
   }
 `;
 
-export const ButtonInclude = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #5267f4;
-  border: none;
-  padding: 12px 25px;
-  color: #fff;
-  border-radius: 8px;
-  transition: 0.4s;
-
-  &:hover {
-    background: ${shade(0.2, '#5267f4')};
-  }
-
-  svg {
-    margin-right: 10px;
-  }
-`;
-
-export const HeaderTable = styled.div`
+export const Title = styled.div`
+  margin: 40px 0 0 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -75,40 +55,46 @@ export const HeaderTable = styled.div`
   h1 {
     font-size: 18px;
     font-weight: 400;
-    color: #959595;
+    color: #3784f6;
   }
 `;
-export const UpdateButton = styled.button`
-  border: none;
-  background: #9aaaba;
-  border-radius: 4px;
-  padding: 5px 15px;
-  font-size: 13px;
-  color: #fff;
-  transition: 0.2s;
 
-  &:hover {
-    background: ${shade(0.2, '#9aaaba')};
+export const Card = styled.div`
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  margin: 20px 20px 0 0;
+  h1 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
   }
-`;
-export const DeleteButton = styled.button`
-  margin-left: 15px;
-  border: none;
-  background: #fe5366;
-  color: #fff;
-  font-size: 13px;
-  border-radius: 4px;
-  padding: 5px 15px;
-  transition: 0.2s;
 
-  &:hover {
-    background: ${shade(0.2, '#fe5366')};
+  p {
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: justify;
+  }
+
+  button {
+    margin-top: 20px;
+    background: #3784f6;
+    color: #fff;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    transition: 0.3s;
+
+    &:hover {
+      background: ${shade(0.2, '#3784f6')};
+    }
   }
 `;
 
 export const Table = styled.div`
   flex: 1;
-  margin-top: 60px;
+  margin-top: 20px;
 `;
 
 export const TableContent = styled.div`
@@ -161,65 +147,6 @@ export const Button = styled.button`
       font-size: 14px;
       font-weight: 500;
       padding: 15px 20px;
-    }
-  }
-`;
-
-export const FormContainer = styled(Form)`
-  padding: 20px 10px;
-
-  button {
-    flex: 1;
-    width: 100%;
-    margin-top: 20px;
-    padding: 15px 20px;
-    border: none;
-    background: #3784f6;
-    color: #fff;
-    border-radius: 4px;
-    transition: 0.3s;
-
-    &:hover {
-      background: ${shade(0.2, '#3784f6')};
-    }
-  }
-`;
-
-export const InputContainer = styled.div`
-  margin-top: 30px;
-
-  p {
-    text-align: left;
-    font-size: 13px;
-    color: #707070;
-    font-weight: 500;
-    margin-bottom: 5px;
-  }
-
-  input {
-    background: #f8f9fc;
-    border-radius: 8px;
-    padding: 16px;
-    width: 420px;
-    border: 2px solid #f8f9fc;
-    color: #3784f6;
-    display: flex;
-    align-items: center;
-  }
-
-  button {
-    flex: 1;
-    width: 100%;
-    margin-top: 20px;
-    padding: 15px 20px;
-    border: none;
-    background: #3784f6;
-    color: #fff;
-    border-radius: 4px;
-    transition: 0.3s;
-
-    &:hover {
-      background: ${shade(0.2, '#3784f6')};
     }
   }
 `;
