@@ -83,3 +83,27 @@ export const SignUp = styled(Link)`
     background: ${shade(0.2, '#5267f4')};
   }
 `;
+
+export const SecretaryContainer = styled(Link)`
+  position: absolute;
+  right: 50px;
+  top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #5267f4;
+  text-decoration: none;
+  padding: 20px 30px;
+  border-radius: 8px;
+  color: #fff;
+  transition: 0.3s;
+
+  &:hover {
+    background: ${shade(0.2, '#5267f4')};
+  }
+
+  h1 {
+    margin-right: 15px;
+    font-size: 16px;
+  }
+`;

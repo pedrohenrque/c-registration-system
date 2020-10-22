@@ -5,6 +5,7 @@ import Dashboard from '../pages/Dashboard';
 import Student from '../pages/Student';
 import Teacher from '../pages/Teacher';
 import SignUp from '../pages/SignUp';
+import Secretary from '../pages/Secretary';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -12,6 +13,7 @@ const Routes: React.FC = () => (
     <Route path="/student" component={Student} />
     <Route path="/teacher" component={Teacher} />
     <Route path="/signup" component={SignUp} />
+    <Route path="/secretary" component={Secretary} />
   </Switch>
 );
 

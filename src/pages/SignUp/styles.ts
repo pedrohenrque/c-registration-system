@@ -16,7 +16,7 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   flex: 1;
-  max-width: 900px;
+  max-width: 530px;
 `;
 
 export const HeaderContainer = styled.div`

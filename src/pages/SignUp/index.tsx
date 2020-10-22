@@ -7,7 +7,6 @@ import InputTitle from '../../components/InputTitle';
 import * as Yup from 'yup';
 import { uuid } from 'uuidv4';
 
-import { Redirect } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
 
 import { Container, HeaderContainer, Content, FormContainer } from './styles';

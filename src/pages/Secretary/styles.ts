@@ -47,15 +47,34 @@ export const HeaderContainer = styled.div`
   }
 `;
 
+export const HeaderTable = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+
+  div {
+    display: flex;
+  }
+
+  h1 {
+    font-size: 18px;
+    font-weight: 400;
+    color: #959595;
+  }
+`;
+
 export const ButtonInclude = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
   background: #5267f4;
   border: none;
-  padding: 12px 25px;
+  border-radius: 4px;
+  padding: 5px 15px;
+  font-size: 13px;
   color: #fff;
-  border-radius: 8px;
   transition: 0.4s;
 
   &:hover {
@@ -67,19 +86,8 @@ export const ButtonInclude = styled.button`
   }
 `;
 
-export const HeaderTable = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 60px;
-
-  h1 {
-    font-size: 18px;
-    font-weight: 400;
-    color: #959595;
-  }
-`;
 export const UpdateButton = styled.button`
+  margin-left: 20px;
   border: none;
   background: #9aaaba;
   border-radius: 4px;
@@ -92,6 +100,7 @@ export const UpdateButton = styled.button`
     background: ${shade(0.2, '#9aaaba')};
   }
 `;
+
 export const DeleteButton = styled.button`
   margin-left: 15px;
   border: none;
@@ -109,7 +118,7 @@ export const DeleteButton = styled.button`
 
 export const Table = styled.div`
   flex: 1;
-  margin-top: 60px;
+  margin-top: 20px;
 `;
 
 export const TableContent = styled.div`

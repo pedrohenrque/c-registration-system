@@ -15,11 +15,13 @@ import {
   TableContent,
   Button,
 } from './styles';
+import { countReset } from 'console';
 
 interface CourseProps {
   id: any;
   name: string;
   bio: string;
+  registered: boolean;
 }
 
 interface NoteProps {
@@ -29,7 +31,7 @@ interface NoteProps {
 }
 
 const Student: React.FC = () => {
-  const [allNote, setAllNote] = useState<NoteProps[]>([
+  const [allNote] = useState<NoteProps[]>([
     {
       id: uuid(),
       course: 'Análise e Desenvolvimento de Sistemas',
@@ -41,52 +43,64 @@ const Student: React.FC = () => {
       note: '7,9',
     },
   ]);
-  const [allCourses, setAllCourses] = useState<CourseProps[]>(() => [
+  const [allCourses] = useState<CourseProps[]>(() => [
     {
       id: uuid(),
       name: 'Análise e Desenvolvimento de Sistemas',
+      registered: true,
       bio:
         'Este profissional tem como especialidade o desenvolvimento de sistemas informatizados para diversos setores, visando um melhor aproveitamento das máquinas com uma maior capacidade de armazenamento e velocidade no processamento dos dados.',
     },
     {
       id: uuid(),
       name: 'Banco de Dados',
+      registered: true,
       bio:
         'Este profissional é responsável por gerenciar todo o ecossistema voltado para armazenamento de dados. Ele é, também, encarregado por desenvolver, monitorar e garantir a integridade e disponibilidade de informações, atuando também nos aspectos relacionados ao suporte e segurança da informação.',
     },
     {
       id: uuid(),
       name: 'Segurança da informação',
+      registered: false,
       bio:
         'Este profissional é um especialista na segurança de redes de computadores. O tecnólogo evita que a rede seja invadida por pessoas não autorizadas, protegendo assim as informações dos usuários da empresa e seus clientes. Seu trabalho garante a confiabilidade, a integridade e a disponibilidade dos dados.',
     },
     {
       id: uuid(),
       name: 'Construção de Edifícios',
+      registered: false,
       bio:
         'O profissional desta área sabe ler projetos e conhece todas as partes integrantes de uma edificação. Domina os diversos tipos de tecnologias construtivas, empregando materiais e suas composições, calculando orçamentos e aprendendo a executar cada projeto.',
     },
     {
       id: uuid(),
       name: 'Engenharia Civil',
+      registered: false,
+
       bio:
         'Este profissional projeta, coordena, executa e fiscaliza qualquer tipo de atividade nos ramos de edificações; estradas; sistema de transportes; abastecimento de água e saneamento; drenagem e irrigação; pontes e grandes estruturas; além de todo tipo de serviço relacionado a essas áreas.',
     },
     {
       id: uuid(),
       name: 'Engenharia da Computação',
+      registered: false,
+
       bio:
         'Este profissional desenvolve computadores, periféricos, hardwares e softwares. Além disso, elabora projetos para diversos ramos que necessitem da tecnologia. O engenheiro da computação projeta robôs, cria sistemas digitais, softwares, sistemas, gerencia redes de computadores, entre outros.',
     },
     {
       id: uuid(),
       name: 'Engenharia Elétrica',
+      registered: false,
+
       bio:
         'Seu segmento de atuação profissional se baseia em atividades relacionadas a eletricidade, providenciando os recursos, orientando a construção, instalação, funcionamento e manutenção de usinas, aparelhos, instalações de projetos e equipamentos elétricos. ',
     },
     {
       id: uuid(),
       name: 'Engenharia de Produção',
+      registered: false,
+
       bio:
         'Com sua capacidade de visão ampla desenvolvida em sua trajetória acadêmica através do portfólio de disciplinas que mesclam entre técnica e gestão, o Engenheiro de Produção atua em projetos, administração, análise de processos produtivos de qualquer organização.',
     },
@@ -121,11 +135,15 @@ const Student: React.FC = () => {
                   alignItems: 'center',
                 }}
               >
-                <button type="button">Se increver</button>
+                <button type="button">
+                  {course.registered === false ? 'Inscrever-se' : 'Inscrito'}
+                  {/* Condição ternária */}
+                </button>
               </div>
             </Card>
           ))}
         </div>
+
         <Title>
           <h1>Notas:</h1>
         </Title>
